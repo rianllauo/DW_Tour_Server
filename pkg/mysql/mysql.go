@@ -12,7 +12,7 @@ var DB *gorm.DB
 // Connection Database
 func DatabaseInit() {
 	var err error
-	dsn := "root@tcp(localhost:3306)/dewetour?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root@ZgXDJBYoNxEojqEQ72zMtcp(containers-us-west-172.railway.app:5600)/railway?charset=utf8mb4&parseTime=True&loc=Local"
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
