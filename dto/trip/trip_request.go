@@ -11,11 +11,11 @@ type TripRequest struct {
 	Eat            string    `json:"eat" form:"eat" gorm:"type: varchar(255)"`
 	Day            int       `json:"day" form:"day"`
 	Night          int       `json:"night" form:"night"`
-	DateTrip       time.Time `json:"date_trip" form:"datetrip"`
+	DateTrip       time.Time `json:"date_trip" form:"date_trip"`
 	Price          int       `json:"price" form:"price"`
 	Quota          int       `json:"quota" form:"quota"`
 	Description    string    `json:"description" form:"description"`
-	Image          string    `json:"image" form:"image" gorm:"type: varchar(255)"`
+	Image          []string    `json:"image" form:"image" gorm:"type: varchar(255)"`
 }
 
 type UpdateTripRequest struct {
@@ -27,7 +27,7 @@ type UpdateTripRequest struct {
 	Eat            string    `json:"eat" form:"eat" gorm:"type: varchar(255)"`
 	Day            int       `json:"day" form:"day"`
 	Night          int       `json:"night" form:"night"`
-	DateTrip       time.Time `json:"date_trip" form:"datetrip"`
+	DateTrip       time.Time `json:"date_trip" form:"date_trip"`
 	Price          int       `json:"price" form:"price"`
 	Quota          int       `json:"quota" form:"quota"`
 	Description    string    `json:"description" form:"description"`

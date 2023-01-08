@@ -12,6 +12,7 @@ type UpdateUserRequest struct {
 	FullName string `json:"fullname" form:"fullname"`
 	Email    string `json:"email" form:"email"`
 	Password string `json:"password" form:"password"`
-	Phone    string `json:"phone" form:"phone" validate:"required"`
-	Address  string `json:"address" form:"address" validate:"required"`
+	Phone    string `json:"phone" form:"phone" `
+	Address  string `json:"address" form:"address" `
+	Avatar   string `json:"avatar" form:"avatar" `
 }

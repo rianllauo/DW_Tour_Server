@@ -2,6 +2,7 @@ package routes
 
 import (
 	handlers "dewetour/handler"
+	"dewetour/pkg/middleware"
 	"dewetour/pkg/mysql"
 	"dewetour/repositories"
 
@@ -14,6 +15,7 @@ func CountryRoutes(r *mux.Router) {
 
 	r.HandleFunc("/countries", h.FindCountry).Methods("GET")
 	r.HandleFunc("/country/{id}", h.GetCountry).Methods("GET")
-	r.HandleFunc("/country", h.CreateCountry).Methods("POST")
-	r.HandleFunc("/country/{id}", h.DeleteCountry).Methods("DELETE")
+	r.HandleFunc("/country", middleware.AuthAdmin(h.CreateCountry)).Methods("POST")
+	r.HandleFunc("/country/{id}", middleware.AuthAdmin(h.DeleteCountry)).Methods("DELETE")
+	r.HandleFunc("/country/{id}", middleware.AuthAdmin(h.UpdateCountry)).Methods("PATCH")
 }

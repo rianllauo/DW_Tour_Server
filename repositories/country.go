@@ -10,7 +10,7 @@ type CountryRepository interface {
 	FindCountry() ([]models.Country, error)
 	GetCountry(ID int) (models.Country, error)
 	CreateCountry(country models.Country) (models.Country, error)
-	// UpdateUser(user models.User) (models.User, error)
+	UpdateCountry(country models.Country) (models.Country, error)
 	DeleteCountry(country models.Country) (models.Country, error)
 }
 
@@ -38,11 +38,11 @@ func (r *repository) CreateCountry(Country models.Country) (models.Country, erro
 	return Country, err
 }
 
-// func (r *repository) UpdateUser(user models.User) (models.User, error) {
-// 	err := r.db.Save(&user).Error
+func (r *repository) UpdateCountry(country models.Country) (models.Country, error) {
+	err := r.db.Model(&country).Updates(country).Error
 
-// 	return user, err
-// }
+	return country, err
+}
 
 func (r *repository) DeleteCountry(country models.Country) (models.Country, error) {
 	err := r.db.Delete(&country).Error

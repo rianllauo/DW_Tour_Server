@@ -4,6 +4,7 @@ import (
 	dto "dewetour/dto/result"
 	usersdto "dewetour/dto/users"
 	"dewetour/models"
+	"dewetour/pkg/bcrypt"
 	"dewetour/repositories"
 	"encoding/json"
 	"net/http"
@@ -49,7 +50,7 @@ func (h *handlerUser) GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponse(user)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: user}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -111,6 +112,13 @@ func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	password, err := bcrypt.HashingPassword(request.Password)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		response := dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()}
+		json.NewEncoder(w).Encode(response)
+	}
+
 	if request.FullName != "" {
 		user.FullName = request.FullName
 	}
@@ -120,7 +128,7 @@ func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if request.Password != "" {
-		user.Password = request.Password
+		user.Password = password
 	}
 
 	if request.Phone != "" {
@@ -129,6 +137,9 @@ func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 
 	if request.Address != "" {
 		user.Address = request.Address
+	}
+	if request.Avatar != "" {
+		user.Avatar = request.Avatar
 	}
 
 	data, err := h.UserRepository.UpdateUser(user)
@@ -165,7 +176,7 @@ func (h *handlerUser) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponse(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: data.ID}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -177,5 +188,16 @@ func convertResponse(u models.User) usersdto.UserResponse {
 		Password: u.Password,
 		Phone:    u.Phone,
 		Address:  u.Address,
+	}
+}
+
+func convertResponseDelete(u models.User) usersdto.UserResponse {
+	return usersdto.UserResponse{
+		ID: u.ID,
+		// FullName: u.FullName,
+		// Email:    u.Email,
+		// Password: u.Password,
+		// Phone:    u.Phone,
+		// Address:  u.Address,
 	}
 }

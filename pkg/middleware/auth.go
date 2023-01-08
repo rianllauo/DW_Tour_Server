@@ -28,7 +28,7 @@ func Auth(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		token = strings.Split(token, "")[1]
+		token = strings.Replace(token, "Bearer ", "", 100)
 		claims, err := jwtToken.DecodeToken(token)
 
 		if err != nil {
@@ -37,6 +37,10 @@ func Auth(next http.HandlerFunc) http.HandlerFunc {
 			json.NewEncoder(w).Encode(response)
 			return
 		}
+
+		// userRole := claims["role"]
+
+		// if claims.Subject!= "admin" {}
 
 		ctx := context.WithValue(r.Context(), "userInfo", claims)
 		r = r.WithContext(ctx)

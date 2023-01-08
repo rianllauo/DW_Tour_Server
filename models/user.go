@@ -8,16 +8,19 @@ type User struct {
 	Password string `json:"password" gorm:"type: varchar(255)"`
 	Phone    string `json:"phone" gorm:"type: varchar(100)"`
 	Address  string `json:"address" gorm:"type: text"`
-	// TransactionID int                 `json:"transaction_id"`
-	// Transaction   TransactionResponse `json:"transaction"`
+	Role     string `json:"role" gorm:"type: varchar(100)"`
+	Avatar   string `json:"avatar" gorm:"type: text"`
 }
 
-// type UserResponse struct {
-// 	ID       int    `json:"id"`
-// 	FullName string `json:"name" gorm:"type: varchar(255)"`
-// 	Email    string `json:"email" gorm:"type: varchar(255)"`
-// }
+type UserResponse struct {
+	ID       int    `json:"id"`
+	FullName string `json:"name" gorm:"type: varchar(255)"`
+	Email    string `json:"email" gorm:"type: varchar(255)"`
+	Phone    string `json:"phone" gorm:"type: varchar(100)"`
+	Address  string `json:"address" gorm:"type: text"`
+	Avatar   string `json:"avatar" gorm:"type: text"`
+}
 
-// func (UserResponse) TableName() string {
-// 	return "users"
-// }
+func (UserResponse) TableName() string {
+	return "users"
+}

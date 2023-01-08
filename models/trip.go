@@ -2,12 +2,14 @@ package models
 
 import "time"
 
+type Image struct{}
+
 type Trip struct {
 	ID             int             `json:"id" gorm:"primary_key:auto_increment"`
-	Title          string          `json:"name" form:"title" gorm:"type: varchar(255)"`
+	Title          string          `json:"name" form:"title" gorm:"type: varchar(255)" validate:"required"`
 	CountryID      int             `json:"country_id"  `
 	Country        CountryResponse `json:"country" gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
-	Accomodation   string          `json:"accomodation" form:"accomodation" gorm:"type: varchar(255)"`
+	Accomodation   string          `json:"accomodation" form:"accomodation" gorm:"type: varchar(255)" validate:"required"`
 	Transportation string          `json:"transportation" form:"transportation" gorm:"type: varchar(255)"`
 	Eat            string          `json:"eat" form:"eat" gorm:"type: varchar(255)"`
 	Day            int             `json:"day" form:"day"`
@@ -34,7 +36,8 @@ type TripResponse struct {
 	Price          int             `json:"price" `
 	Quota          int             `json:"quota" `
 	Description    string          `json:"description" `
-	Image          string          `json:"image"`
+	Image          []string        `json:"image"`
+	UserId         int             `json:"user_id"`
 }
 
 func (TripResponse) TableName() string {

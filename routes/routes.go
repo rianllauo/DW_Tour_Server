@@ -14,6 +14,8 @@ func RouteInit(r *mux.Router) {
 	AuthRoutes(r)
 	TripRoutes(r)
 	CountryRoutes(r)
+	TransactionRoutes(r)
+	UserTrcRoutes(r)
 	// Call ProfileRoutes() and ProductRoutes() function here ...
 	// ProfileRoutes(r)
 	// ProductRoutes(r)
