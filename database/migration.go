@@ -17,7 +17,7 @@ func RunMigration() {
 
 	if err != nil {
 		fmt.Println(err)
-		panic("Migration Failed")
+		fmt.Println(err.Error())
 	}
 
 	fmt.Println("Migration Success")
