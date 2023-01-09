@@ -99,8 +99,8 @@ func (h *handlerTrip) CreateTrip(w http.ResponseWriter, r *http.Request) {
 		Description:    r.FormValue("description"),
 		Price:          price,
 		Quota:          quota,
-		// Image:          []string{r.FormValue("image")},
-		CountryID: country_id,
+		Image:          []string{r.FormValue("image")},
+		CountryID:      country_id,
 	}
 
 	validation := validator.New()
@@ -119,15 +119,15 @@ func (h *handlerTrip) CreateTrip(w http.ResponseWriter, r *http.Request) {
 		Accomodation:   request.Accomodation,
 		Transportation: request.Transportation,
 		Eat:            request.Eat,
-		// Image:          string{r.FormValue("image")},
-		Day:         request.Day,
-		Night:       request.Night,
-		DateTrip:    date_trip,
-		Price:       request.Price,
-		Quota:       request.Quota,
-		Description: request.Description,
-		CountryID:   request.CountryID,
-		UserId:      userId,
+		Image:          request.Image,
+		Day:            request.Day,
+		Night:          request.Night,
+		DateTrip:       date_trip,
+		Price:          request.Price,
+		Quota:          request.Quota,
+		Description:    request.Description,
+		CountryID:      request.CountryID,
+		UserId:         userId,
 	}
 
 	trip, err = h.TripRepository.CreateTrip(trip)

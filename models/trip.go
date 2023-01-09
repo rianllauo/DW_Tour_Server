@@ -18,7 +18,7 @@ type Trip struct {
 	Price          int             `json:"price" form:"price"`
 	Quota          int             `json:"quota" form:"quota"`
 	Description    string          `json:"description" form:"description"`
-	Image          string          `json:"image" form:"image" gorm:"type: varchar(255)"`
+	Image          []string        `json:"image" form:"image" gorm:"type: varchar(255)"`
 	UserId         int             `json:"user_id"`
 }
 
