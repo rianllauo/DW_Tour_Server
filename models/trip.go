@@ -1,6 +1,10 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/lib/pq"
+)
 
 type Image struct{}
 
@@ -18,7 +22,7 @@ type Trip struct {
 	Price          int             `json:"price" form:"price"`
 	Quota          int             `json:"quota" form:"quota"`
 	Description    string          `json:"description" form:"description"`
-	Image          []string        `json:"image" form:"image" gorm:"type: varchar(255)"`
+	Image          pq.StringArray  `json:"image" form:"image" gorm:"type: varchar(255)"`
 	UserId         int             `json:"user_id"`
 }
 
@@ -36,7 +40,7 @@ type TripResponse struct {
 	Price          int             `json:"price" `
 	Quota          int             `json:"quota" `
 	Description    string          `json:"description" `
-	Image          []string        `json:"image"`
+	Image          pq.StringArray  `json:"image"`
 	UserId         int             `json:"user_id"`
 }
 

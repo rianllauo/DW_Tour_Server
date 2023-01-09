@@ -16,6 +16,7 @@ import (
 	"github.com/go-playground/validator"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/gorilla/mux"
+	"github.com/lib/pq"
 )
 
 var path_file = "http://localhost:5000/uploads/"
@@ -99,7 +100,7 @@ func (h *handlerTrip) CreateTrip(w http.ResponseWriter, r *http.Request) {
 		Description:    r.FormValue("description"),
 		Price:          price,
 		Quota:          quota,
-		Image:          []string{r.FormValue("image")},
+		Image:          pq.StringArray{r.FormValue("image")},
 		CountryID:      country_id,
 	}
 
