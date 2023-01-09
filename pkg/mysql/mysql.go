@@ -2,8 +2,10 @@ package mysql
 
 import (
 	"fmt"
+	"os"
 
-	"gorm.io/driver/mysql"
+	// Import postgres package here ...
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
