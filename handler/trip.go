@@ -100,7 +100,7 @@ func (h *handlerTrip) CreateTrip(w http.ResponseWriter, r *http.Request) {
 		Description:    r.FormValue("description"),
 		Price:          price,
 		Quota:          quota,
-		Image:          pq.StringArray{r.FormValue("image")},
+		Image:          pq.StringArray([]string{r.FormValue("image")}),
 		CountryID:      country_id,
 	}
 
